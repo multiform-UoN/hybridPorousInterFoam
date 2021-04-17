@@ -1,0 +1,47 @@
+# LS junk/cache
+**/.vscode/**
+**/compile_commands.json    
+**/.ccls-cache/**
+**/.clangd    
+**@*    
+
+# Precompiled headers
+**.dep    
+**/lnInclude/**    
+
+# Compiled objects and Test Binaries
+**linux64**    
+**.so
+**Test
+**darwin**
+
+# Code coverage and meta info
+**.info    
+**.gcno    
+**.gcda    
+**/coverage-output/**    
+.codacy-coverage/    
+
+# Test Binaries
+*Test    
+*TestDriver
+
+# Documentation
+**/html/**    
+**/xml/**    
+**/latex/**    
+**/api/**    
+**/build/**    
+**/_build/**    
+**.plist    
+
+# Temporary Files
+**.tmp    
+
+# All kinds of log files
+*.log
+dev-session.yml
+
+# mesh sets and zones
+**/sets/**
+**/zones/**

@@ -55,17 +55,17 @@ namespace Foam
       public capillarityModel
     {
       // pcVan Genuchten coefficients
-      dictionary pcVanGenuchtenCoeffs_;             
-      volScalarField Sminpc_,Smaxpc_;    
+      dictionary pcVanGenuchtenCoeffs_;
+      volScalarField Sminpc_,Smaxpc_;
       volScalarField m_,n_,alpha_;
       volScalarField pc0_;
 
-      // effective saturation of phase b 
+      // effective saturation of phase b
       volScalarField Se_;
 
       // capillary pressure, derivative and capacity
       volScalarField pc_, dpcdS_, Ch_;
-        
+
     public:
 
       //- Runtime type information
@@ -103,7 +103,7 @@ namespace Foam
       void correct()
       {
 	Se_ == (Sb_- Sminpc_)/(Smaxpc_-Sminpc_);
-	Se_.max(1e-4);        
+	Se_.max(1e-4);
 	Se_.min(1-1e-4);
 
 	pc_ == pc0_ * pow(pow(Se_,-1/m_)-1,1/n_);
@@ -112,12 +112,12 @@ namespace Foam
       }
 
       //- Correct effective saturation and capillary capacity and return saturation (Richards' solver)
-      volScalarField correctAndSb(volScalarField h) 
-      {          
+      volScalarField correctAndSb(volScalarField h)
+      {
         //- Compute Saturation from! head pressure
         h.dimensions().reset(dimless);
-        volScalarField Stmp_ = neg(h) *(Sminpc_+(Smaxpc_-Sminpc_)*pow(1.0+pow(alpha_*mag(h),n_),-m_)) + pos(h)*(Smaxpc_-SMALL);
-        h.dimensions().reset(dimLength);  
+        volScalarField Stmp_(neg(h) *(Sminpc_+(Smaxpc_-Sminpc_)*pow(1.0+pow(alpha_*mag(h),n_),-m_)) + pos(h)*(Smaxpc_-SMALL));
+        h.dimensions().reset(dimLength);
 
         //- Update effective saturation and capillary capacity
 	Se_ == (Stmp_- Sminpc_)/(Smaxpc_-Sminpc_);
